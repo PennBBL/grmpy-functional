@@ -1,0 +1,25 @@
+---
+title: "Merge GRMPY Variables"
+output: html_notebook
+---
+
+read them in
+```{r}
+
+ari <- read.csv('grmpy_ari.csv')
+demos <- read.csv('grmpy_demos.csv')
+
+```
+
+merge
+```{r}
+
+vars <- merge(ari, demos, by = 'bblid')
+
+```
+
+
+write to csv
+```{r}
+write.csv(vars, 'grmpy_vars.csv')
+```

@@ -1,0 +1,35 @@
+---
+title: "mergedCovQA"
+output: html_document
+---
+
+Read in the CSVs
+```{r}
+hasID <- read.csv('newrest.csv')
+hasQA <- read.csv('rescoverage2.csv')
+```
+
+Ok, let's name the columns appropriately
+```{r}
+colnames(hasQA) <- c('path','coverage','pass')
+colnames(hasID) <- c('bblid', 'path')
+```
+
+Now, let's merge these by path
+```{r}
+hasBoth <- merge(hasID, hasQA, by = 'path')
+```
+
+Let's get rid of the junk
+```{r}
+goodstuff <- hasBoth[,c('bblid', 'pass')]
+```
+
+Let's output to a csv
+```{r}
+write.csv(goodstuff, 'coverageQAbyID.csv')
+```
+
+
+
+

@@ -1,0 +1,25 @@
+---
+title: "get_xcp_motion"
+output: html_document
+---
+
+read it in
+```{r}
+
+xcp <- read.csv('xcp_qvars.csv')
+
+```
+
+
+```{r}
+xcp[1,c('bblid','id1','id2','id3')]
+colnames(xcp)[1]<- 'bblid'
+
+```
+
+
+```{r}
+write.csv(xcp, 'xcp_qvars_2.csv')
+```
+
+

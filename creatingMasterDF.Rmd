@@ -1,0 +1,53 @@
+---
+title: "creatingMasterDF"
+output: html_document
+---
+
+
+```{r}
+
+data <- read.csv('/data/jux/BBL/projects/diego_cwasPractice/subs/grmpy_vars.csv')
+coverage <- read.csv('/data/jux/BBL/projects/diego_cwasPractice/subs/coverageQAbyID_2.csv')
+xcp <- read.csv('/data/jux/BBL/projects/diego_cwasPractice/subs/xcp_qvars_2.csv')
+data0 <- merge(data,xcp,by='bblid')#,all.x=T)
+data2 <- merge(data0,coverage,by='bblid')#,all.x=T)
+
+
+
+```
+
+
+```{r}
+
+data2$restMeanRelRMSMotionExclude <- as.numeric(data2$relMeanRMSMotion > 0.2)
+#data2$restNSpikesMotionExclude <- as.numeric(data2$nframesHighMotionrms0.25 > 20)
+
+data2$restExclude <- as.numeric(data2$restMeanRelRMSMotionExclude)
+data2$restExcludeVoxelwise <- as.numeric(data2$restMeanRelRMSMotionExclude  | !data2$restVoxelwiseCoverageInclude)
+
+```
+
+
+
+```{r}
+
+restQA <- data.frame(
+   bblid=data2$bblid,
+   #restExclude=data2$restExclude,
+   #restExcludeVoxelwise=data2$restExcludeVoxelwise,
+   #restNoDataExclude=as.numeric(!data2$restAcquired),
+   restRelMeanRMSMotion=data2$relMeanRMSMotion,
+   restRelMeanRMSMotionExclude=data2$restMeanRelRMSMotionExclude,
+   #restNSpikesMotion=data2$nframesHighMotionrms0.25,
+   #restNSpikesMotionExclude=data2$restNSpikesMotionExclude,
+   #restNormCrossCorr=data2$normCrossCorr,
+   #restNormCoverage=data2$normCoverage,
+   #restCoregCrossCorr=data2$coregCrossCorr,
+   #restCoregCoverage=data2$coregCoverage,
+   restVoxelwiseCoverageExclude=as.numeric(!data2$restVoxelwiseCoverageInclude)
+   
+)
+
+```
+
+
