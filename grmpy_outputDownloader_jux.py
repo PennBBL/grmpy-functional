@@ -2,7 +2,7 @@
 import zipfile
 import os
 import flywheel
-fw = flywheel.Client()
+fw = flywheel.Client('<yourAPIkey')
 proj = fw.projects.find_first('label=GRMPY_822831')
 sessions = proj.sessions()
 sessions = [fw.get(x.id) for x in sessions]
@@ -13,10 +13,13 @@ for x in range(len(sessions)):
         if 'XCP_resting_36despike' in y.label: # Only download the desired XCP output
 
             #print (y.label)
-
+            try:
             #Download the entire output
-            outname = '/data/jux/BBL/projects/diego_cwasPractice/subs/ses-{}.zip'.format(sessions[x].label)
-            y.download_file('xcpEngineouput_xcp.zip', outname)
+                outname = '/data/jux/BBL/projects/diego_cwasPractice/subs/ses-{}.zip'.format(sessions[x].label)
+                y.download_file('xcpEngineouput_xcp.zip', outname)
+            except:
+                continue
+
             os.system('unzip   ' + outname + ' -d /data/jux/BBL/projects/diego_cwasPractice/subs/ ')
 
             # Copy the important sutuff
