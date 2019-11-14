@@ -3,7 +3,7 @@ singimage=/data/joy/BBL/applications/bids_apps/cwasmdmr2.simg # cwasmdmr image o
 scriptdir=/usr/local/bin # script to run inside the image
 
 
-mdmrouput=/home/ddavila//data/jux/BBL/projects/grmpy-restbold/subs/output #output directory. note that i added /home/username in front
+mdmrouput=/home/ddavila//data/jux/BBL/projects/grmpy-restbold/subs/MDMRoutput #output directory. note that i added /home/username in front
 brainmask=/home/ddavila//data/jux/BBL/projects/grmpy-restbold/subs/MNIgreymask4mm.nii.gz #brainmask usually greymatter mask
 bgim=/home/ddavila//data/jux/BBL/projects/grmpy-restbold/subs/MNIgreymask4mm.nii.gz #usually pnc template
 
